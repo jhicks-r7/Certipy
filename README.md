@@ -26,6 +26,7 @@ Certipy is an offensive tool for enumerating and abusing Active Directory Certif
       - [ESC8](#esc8)
       - [ESC9 & ESC10](#esc9--esc10)
       - [ESC11](#esc11)
+    - [ESC8 for Initial Access (ia8)] (#ia8)
   - [Contact](#contact)
   - [Credits](#credits)
 
@@ -793,6 +794,16 @@ ESC11 can be abused with impacket's ntlmrelayx:
 ```bash
 $ ntlmrelayx.py -t rpc://ca.corp.local -rpc-mode ICPR -icpr-ca-name corp-DC-CA -smb2support
 ```
+### IA8
+The ia8 module was added by me (jhicks-r7). It is primarily the relay module with a few additions. This module will:
+- Listen for a connection via an smb server
+- Relay captured credentials to the /certsrv/certrqxt.asp endpoint and extract certificate template names
+- Request a certificate for each template and attempt to authenticate until it finds a valid one for authentication and extracts the NTLM hash
+- Write the hash to a file named 'certipy_hashes.txt'
+
+This is in some very early development and is very hacked together. It needs a lot of refinement, but so far it works. It may be useful when you have traffic you can poison to elicit a credentialed connection, but can't manage to crack the hash. If you've already identified the CA (try using impacket's rpcdump and looking for the cert named pipe, more to come on that soon!) you can use this to relay those credentials to maybe get the hash for pth attacks.
+
+The primary option you'll need for this is -ca, but you can also include a -dc-ip in the case that you don't have working DNS or want to authenticate to a specific domain controller after obtaining a certificate.
 
 ## Contact
 

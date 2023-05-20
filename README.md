@@ -26,7 +26,7 @@ Certipy is an offensive tool for enumerating and abusing Active Directory Certif
       - [ESC8](#esc8)
       - [ESC9 & ESC10](#esc9--esc10)
       - [ESC11](#esc11)
-    - [ESC8 for Initial Access (ia8)] (#ia8)
+    - [ESC8 for Initial Access](#ia8)
   - [Contact](#contact)
   - [Credits](#credits)
 

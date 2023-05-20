@@ -55,7 +55,6 @@ def main() -> None:
         logger.logging.setLevel(logging.DEBUG)
     else:
         logger.logging.setLevel(logging.INFO)
-
     try:
         actions[options.action](options)
     except Exception as e:
